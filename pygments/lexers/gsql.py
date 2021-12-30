@@ -101,12 +101,11 @@ class GSQLLexer(RegexLexer):
         'relations': [
             (r'(-\s?)(\(.*\:\w?\))(\s?-)', bygroups(Operator, using(this), Operator)),
             (r'->|<-', Operator),
-            (r'[.*{}]', Punctuation),
+            (r'[.*{}\[\]\<\>\_]', Punctuation),
         ],
         'strings': [
-            (r'"(?:\\[tbnrf\'"\\]|[^\\"])*"', String),
+            (r'"([^"\\]|\\.)*"', String),
             (r'@{1,2}\w+', Name.Variable),
-            (r'(\<\w+)?\<(\w+\>?\,?\s?)+\>+', Name.Constant),
         ],
         'whitespace': [
             (r'\s+', Whitespace),
@@ -116,7 +115,7 @@ class GSQLLexer(RegexLexer):
             (r'(\d+\.\d+|\d+)', Number),
         ],
         'operators': [
-            (r'[^0-9|\/|\-](\-\=|\+\=|\*\=|\\\=|\=|\=\=|\=\=\=|\+|\-|\*|\\|\+\=|\>|\<)[^\>|\/]', Operator),
-            (r'(\(|\)|\,|\;|\=|\-|\+|\*|\/|\>|\<|\:)', Operator),
+            (r'\$|[^0-9|\/|\-](\-\=|\+\=|\*\=|\\\=|\=|\=\=|\=\=\=|\+|\-|\*|\\|\+\=|\>|\<)[^\>|\/]', Operator),
+            (r'(\||\(|\)|\,|\;|\=|\-|\+|\*|\/|\>|\<|\:)', Operator),
         ],
     }
